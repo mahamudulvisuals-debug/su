@@ -4,6 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { Language } from './types';
 import { Navbar } from './components/Navbar';
 import { UnifiedHero } from './components/UnifiedHero';
@@ -70,12 +71,15 @@ export default function App() {
   // If a slide is opened, render the dedicated full-page reader with Back icon
   if (openedSlideId !== null) {
     return (
-      <IslamicSlideDetailPage
-        slideId={openedSlideId}
-        onBack={handleBackToWebsite}
-        onSelectSlide={(id) => handleOpenSlide(id)}
-        language={language}
-      />
+      <>
+        <IslamicSlideDetailPage
+          slideId={openedSlideId}
+          onBack={handleBackToWebsite}
+          onSelectSlide={(id) => handleOpenSlide(id)}
+          language={language}
+        />
+        <Analytics />
+      </>
     );
   }
 
@@ -102,6 +106,7 @@ export default function App() {
           <Footer language={language} />
         </WaterBackground>
       </main>
+      <Analytics />
     </div>
   );
 }
